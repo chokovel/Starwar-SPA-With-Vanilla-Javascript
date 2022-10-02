@@ -1,4 +1,5 @@
 root = document.getElementById("root");
+displayErrDiv = document.getElementById("error");
 const starimgs = [
     'img/Luke-skywalker.jpeg',
     'img/C-3PO.jpeg',
@@ -12,6 +13,27 @@ const starimgs = [
     'img/Obi-Wan Kenobi.jpeg',
 ];
 
+fetchPeople()
+.then(response => {
+    console.log('Success');
+})
+.catch(error => {
+    let displayErr = document.createElement('h1');
+    let displayErrTxt = document.createTextNode(`Error, Unsuccessful!`);
+    displayErr.appendChild(displayErrTxt);
+
+    let displayErr2 = document.createElement('h3');
+    let displayErrTxt2 = document.createTextNode(`Try again...`);
+    displayErr2.appendChild(displayErrTxt2);
+    // console.log('Unsuccessful!');
+    // console.error(error);
+    displayErrDiv.appendChild(displayErr)
+    displayErrDiv.appendChild(displayErr2)
+   
+});
+
+
+    
 //fetches data from the API
 async function fetchPeople() {
     let response = await fetch("https://swapi.dev/api/people");
@@ -29,8 +51,6 @@ function main( img, name, height, gender, clicked) {
 
     let displayDiv = document.createElement('div');
         displayDiv.className = ["character-display container row grid-container"];
-        // displayDiv.className = "container";
-        // displayDiv.className = "row";
 
     let imgDiv = document.createElement('div');
         imgDiv.className = "col-md-8 p-5";
